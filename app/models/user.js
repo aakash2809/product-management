@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bycrypt = require('bcryptjs');
-//const logger = require('../../config/logger');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -10,7 +9,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: [true, 'email id alreay exist']
+    unique: true
   },
   password: {
     type: String,
@@ -51,6 +50,19 @@ class UserModel {
       }
     });
   }
+
+   /**
+      * @description find email id in database and validate
+      * @param {*} loginCredential holds login credentials
+      * @param {*} callback holds a function
+     */
+    getDetailOfGivenEmailId = (loginCredential, callback) => {
+      const { email } = loginCredential;
+      User.find({ email: `${email}` }, (error, loginResult) => {
+          (error) ? callback(error, null) : callback(null, loginResult);
+      });
+  }
+
 }
 
 module.exports = new UserModel();

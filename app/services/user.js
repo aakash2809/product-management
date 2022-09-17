@@ -1,10 +1,5 @@
-//const bycrypt = require('bcryptjs');
-// const EventEmitter = require('events');
 const userModel = require('../models/user');
-// const logger = require('../../config/logger');
-// const jwtAuth = require('../middlewares/helper');
-// const resposnsCode = require('../../util/staticFile.json');
-// const helper = require('../middlewares/helper');
+const bycrypt = require('bcryptjs');
 
 class UserServices {
  
@@ -28,6 +23,49 @@ class UserServices {
       }
     });
   }
+
+   /**
+      * @description validate credentials and return result accordingly to database using model methods
+      * @param {*} loginCredentials
+      * @param {*} callback holds a function
+      */
+    validateAndLogin = (loginCredentials, callback) => userModel.getDetailOfGivenEmailId(loginCredentials, (error, loginResult) => {
+      let loginResponse = '';
+      if (error) {
+          error = {
+              success: false,
+              statusCode: 500,
+              message: error,
+          };
+          callback(error, null);
+      } else if (loginResult[0] == null) {
+          loginResponse = {
+              success: false,
+              statusCode: 404,
+              message: 'email id does not exist',
+          };
+          callback(null, loginResponse);
+      } else {
+          bycrypt.compare(loginCredentials.password, loginResult[0].password, (error, result) => {
+               if (result) {
+                  loginResponse = {
+                      success: true,
+                      statusCode: 200,
+                      message: 'login successfull',
+                      user: loginResult,
+                  };
+                  callback(null, loginResponse);
+              } else {
+                  error = {
+                      success: false,
+                      statusCode: 401,
+                      message: 'Invalid password',
+                  };
+                  callback(error, null);
+              }
+          });
+      }
+  })
 
 }
 

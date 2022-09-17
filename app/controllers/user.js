@@ -7,19 +7,6 @@ class UserControllers {
    * @param {*} response sends response from server
    */
     register = (request, response) => {
-        // const validatedRequestResult = userValidator.validate(request.body);
-        // if (validatedRequestResult.error) {
-        //     logger.error('SCHEMAERROR: Request did not match with schema');
-        //     response.send({
-        //         success: false,
-        //         status_code: resposnsCode.BAD_REQUEST,
-        //         message: validatedRequestResult.error.details[0].message,
-        //     });
-        //     return;
-        // }
-
-        console.log('requst body', request.body);
-
         const registrationDetails = {
             name: request.body.name,
             email: request.body.email,
@@ -55,38 +42,37 @@ class UserControllers {
         );
     };
 
-    /**
+        /**
        * @description login to database
        * @param {*} request
        * @param {*} response
        */
-    // login = (request, response) => {
-    //     console.log('TRACKED_PATH: Inside controller');
-    //     const loginDetails = {
-    //         email: request.body.email,
-    //         password: request.body.password,
-    //     };
-    //     console.log(
-    //         'INVOKING: getLoginCredentialAndCallForValidation method of login services',
-    //     );
-    //     userServices.validateAndLogin(
-    //         loginDetails,
-    //         (error, loginResult) => {
-    //             error
-    //                 ? response.send({
-    //                     success: error.success,
-    //                     statusCode: error.statusCode,
-    //                     message: error.message,
-    //                 })
-    //                 : response.send({
-    //                     success: loginResult.success,
-    //                     statusCode: loginResult.statusCode,
-    //                     message: loginResult.message,
-    //                     token: loginResult.data,
-    //                 });
-    //         },
-    //     );
-    // };
+    login = (request, response) => {
+        console.log('TRACKED_PATH: Inside controller');
+        const loginDetails = {
+            email: request.body.email,
+            password: request.body.password,
+        };
+        console.log(
+            'INVOKING: getLoginCredentialAndCallForValidation method of login services',
+        );
+        userServices.validateAndLogin(
+            loginDetails,
+            (error, loginResult) => {
+                error
+                    ? response.send({
+                        success: error.success,
+                        statusCode: error.statusCode,
+                        message: error.message,
+                    })
+                    : response.send({
+                        success: loginResult.success,
+                        statusCode: loginResult.statusCode,
+                        message: loginResult.message,
+                    });
+            },
+        );
+    };
 }
 
 module.exports = new UserControllers();
