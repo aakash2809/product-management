@@ -1,5 +1,6 @@
 const userServices = require('../services/user');
 
+
 class UserControllers {
     /**
    * @description add user to database
@@ -68,6 +69,7 @@ class UserControllers {
                     : response.send({
                         success: loginResult.success,
                         statusCode: loginResult.statusCode,
+                        token: loginResult.token,
                         message: loginResult.message,
                     });
             },

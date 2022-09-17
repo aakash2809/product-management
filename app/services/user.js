@@ -1,5 +1,6 @@
 const userModel = require('../models/user');
 const bycrypt = require('bcryptjs');
+const { genrateToken } = require('../middleware/helper')
 
 class UserServices {
  
@@ -48,10 +49,13 @@ class UserServices {
       } else {
           bycrypt.compare(loginCredentials.password, loginResult[0].password, (error, result) => {
                if (result) {
+                 let token = genrateToken(loginResult[0])
+                console.log('loginResult[0]', loginResult[0])
                   loginResponse = {
                       success: true,
                       statusCode: 200,
                       message: 'login successfull',
+                      token: token,
                       user: loginResult,
                   };
                   callback(null, loginResponse);
