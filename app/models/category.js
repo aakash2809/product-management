@@ -39,7 +39,7 @@ class CategoryModel {
    * @param {*}categoryId holds _id that is category id
    */
    deleteCatgoryByCategoryId = (categoryId) => new Promise((resolve, reject) => {
-    Category.findByIdAndDelete(categoryId, (error, categoryResult) => {
+    Category.findByIdAndDelete({_id: categoryId}, (error, categoryResult) => {
       if (error) {
         return reject(error);
       }

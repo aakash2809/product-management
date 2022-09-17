@@ -15,7 +15,7 @@ class Routes {
       // Update category by category Id
       app.put('/update/category',verifyToken, updateCategoryByCategoryId);
       // Delete a category with categoryId
-      app.delete('delete/category',verifyToken, deleteCategryByCategryId);
+      app.delete('/delete/category',verifyToken, deleteCategryByCategryId);
     }
   }
   
