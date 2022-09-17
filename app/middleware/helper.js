@@ -20,7 +20,6 @@ class Helper {
    */
   verifyToken = (request, response, next) => {
     try {
-        console.log('token', request.headers.authorization );
       const token = request.headers.authorization.split('Bearer ')[1];
       const decode = Buffer.from(JSON.stringify(token), 'base64').toString('ascii');
         if (token) {
