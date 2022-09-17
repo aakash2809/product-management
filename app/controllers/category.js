@@ -58,8 +58,8 @@ class CategoryController {
   };
 
   /**
-   * @description delete Category by _id that is noteId
-   * @param {*} request takes _id that is noteId
+   * @description delete Category by _id
+   * @param {*} request 
    * @param {*} response sends response from server
    */
   deleteCategryByCategryId = async (request, response) => {
