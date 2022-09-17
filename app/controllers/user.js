@@ -23,7 +23,7 @@ class UserControllers {
             return;
         }
 
-       console.log('INVOKING: registerUser method of services');
+        console.log('INVOKING: registerUser method of services');
         userServices.registerUser(
             registrationDetails,
             (error, registrationResult) => {
@@ -43,11 +43,11 @@ class UserControllers {
         );
     };
 
-        /**
-       * @description login to database
-       * @param {*} request
-       * @param {*} response
-       */
+    /**
+   * @description login to database
+   * @param {*} request
+   * @param {*} response
+   */
     login = (request, response) => {
         console.log('TRACKED_PATH: Inside controller');
         const loginDetails = {

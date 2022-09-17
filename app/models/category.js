@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bycrypt = require('bcryptjs');
 
 const categorySchema = new mongoose.Schema({
     category_name: {
