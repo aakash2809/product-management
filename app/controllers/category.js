@@ -40,7 +40,7 @@ class CategoryController {
   updateCategoryByCategoryId = async (request, response) => {
     console.log('TRACKED_PATH: Inside controller');
     try {
-      const result = await categoryServices.updateCategoryByCategoryId(request.body.categoryId, { Category: request.body.Category }, request.userData.userId);
+      const result = await categoryServices.updateCategoryByCategoryId(request.body.categoryId, { category_name: request.body.category }, request.userData.userId);
       console.log('Category updated successfully');
       response.send({
         success: result.success,

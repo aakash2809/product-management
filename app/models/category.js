@@ -53,7 +53,7 @@ class CategoryModel {
    * @param {*} dataToUpdate takes data to be upadated in json formate
    */
    updateCatgoryByCategoryId = (categoryId, dataToUpdate) => new Promise((resolve, reject) => {
-    Category.findByIdAndUpdate(categoryId, dataToUpdate, { new: true }, (error, categoryResult) => {
+    Category.findByIdAndUpdate({_id: categoryId}, dataToUpdate, { new: true }, (error, categoryResult) => {
       if (error) {
         return reject(error);
       }
